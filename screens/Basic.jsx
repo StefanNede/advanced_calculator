@@ -13,13 +13,14 @@ export default function Basic(){
     const row5 = ['+|-', '0', '•','='];
     const keys = [[...row1], [...row2], [...row3], [...row4], [...row5]];
     const [calculation, setCalculation] = useState("");
+    const [previousResult, setPreviousResult] = useState("");
     return(
         <View style={{flex:1, alignItems:"center"}}>
             <View style={{height:windowHeight*0.3, width:windowWidth}}>
-                <CalculationView  setCalculation={setCalculation} calculation={calculation} />
+                <CalculationView  setCalculation={setCalculation} calculation={calculation} previousResult={previousResult} setPreviousResult={setPreviousResult} />
             </View>
             <View style={styles.buttonContainer}>
-                <Keyboard keys = {keys} setCalculation={setCalculation} calculation={calculation} />
+                <Keyboard keys = {keys} setCalculation={setCalculation} calculation={calculation} previousResult={previousResult} setPreviousResult={setPreviousResult}/>
             </View>
         </View>
     );

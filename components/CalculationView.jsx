@@ -7,10 +7,10 @@ export default function CalculationView(props){
     return (
         <View style={{flex:1, borderColor: 'darkgray', borderBottomWidth: 2}}>
             <View style={styles.previous}>
-                <Text>previous result</Text>
+                <Text>{props.previousResult}</Text>
             </View>
             <View style={styles.current}>
-                <Text>current calculations</Text>
+                <Text style={{fontSize: 30}}>{props.calculation}</Text>
             </View>
         </View>
     )

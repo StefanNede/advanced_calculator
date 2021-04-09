@@ -27,13 +27,17 @@ export default function App(){
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={Home} 
+        options={{
+          headerTitleAlign: 'center'
+        }}  />
         <Stack.Screen name="Basic" component={Basic} 
         options={{ title: 'basic calculator', 
         headerStyle: {
             backgroundColor: 'lightgray',
           },
         headerTintColor: 'black',
+        headerTitleAlign: 'center'
         }}  />
         <Stack.Screen name="Statistics" component={Statistics} 
         options={{ title: 'statistics calculator',
@@ -41,6 +45,7 @@ export default function App(){
           backgroundColor: 'lightgray',
         },
         headerTintColor: 'black',
+        headerTitleAlign: 'center'
         }} />
       </Stack.Navigator>
     </NavigationContainer>

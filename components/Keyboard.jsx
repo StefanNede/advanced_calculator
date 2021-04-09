@@ -1,10 +1,50 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
 import { windowWidth, windowHeight } from "../global/dimensions";
 
 export default function Keyboard({ keys, setCalculation, calculation, previousResult, setPreviousResult }) {
+    const countOccurences = (str, target) =>{
+        let count = 0;
+        for(let letter of str){
+            if (letter === target){
+                count++;
+            }
+        }
+        return count;
+    }
     const handleCalculation = () => {
-        setPreviousResult(calculation);
+        // the parts of the calculation: 2+2 -> [2,+,2]
+        const parts = calculation.split("");
+        let argument1, argument2, result;
+        if (calculation[0]==="-" && countOccurences(calculation, "-")===1 && countOccurences(calculation, "+")===0 && countOccurences(calculation, "÷")===0 && countOccurences(calculation, "x")===0){
+            setPreviousResult(calculation);  
+        }
+        else if (countOccurences(calculation, "-")===0 && countOccurences(calculation, "+")===0 && countOccurences(calculation, "÷")===0 && countOccurences(calculation, "x")===0){
+            setPreviousResult(calculation);   
+        }
+        else {
+            for (let i=0;i<parts.length;i++){
+                if (parts[i]=== "+" || parts[i]=== "-" || parts[i]=== "x" || parts[i]=== "÷"){
+                    argument1 = parseInt(parts.slice(0, i).join(""));
+                    argument2 = parseInt(parts.slice(i+1).join(""));
+                    switch (parts[i]){
+                        case "+":
+                            result = argument1 + argument2;
+                            break;
+                        case "-":
+                            result = argument1 - argument2;
+                            break
+                        case "x":
+                            result = argument1 * argument2;
+                            break
+                        case "÷":
+                            result = argument1 / argument2;
+                            break
+                    }
+                }
+            }
+            setPreviousResult(result); 
+        }
         setCalculation("");
     }
     const handlePress = (buttonPressed) =>{
@@ -14,6 +54,13 @@ export default function Keyboard({ keys, setCalculation, calculation, previousRe
                 break;
             case "=":
                 handleCalculation();
+                break;
+            case "+|-":
+                if (calculation[0] === "-"){
+                    setCalculation(calculation.slice(1));
+                } else {
+                    setCalculation(`-${calculation}`);
+                }
                 break;
             default:
                 setCalculation(calculation + buttonPressed);
@@ -48,12 +95,22 @@ const styles = StyleSheet.create({
     numberButton: {
         backgroundColor: 'lightgray',
         padding: 5,
-        height: windowHeight * 0.075,
-        width: windowHeight * 0.075,
+        height: windowHeight * 0.1,
+        width: windowHeight * 0.1,
         borderRadius: 100,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        ...Platform.select({
+            ios: {
+                height: windowHeight * 0.08,
+                width: windowHeight * 0.08,
+            },
+            android: {
+                height: windowHeight * 0.1,
+                width: windowHeight * 0.1,
+            }
+          })
     },
     operatorButtons: {
         backgroundColor: 'orange',

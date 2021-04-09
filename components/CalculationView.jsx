@@ -4,10 +4,16 @@ import {View, Text, TouchableOpacity, StyleSheet, Button} from 'react-native';
 import {windowHeight, windowWidth} from "../global/dimensions";
 
 export default function CalculationView(props){
+    const getPrevious = () =>{
+        // puts the previous result in the current calculation
+        props.setCalculation(props.calculation + props.previousResult);
+    }
     return (
         <View style={{flex:1, borderColor: 'darkgray', borderBottomWidth: 2}}>
             <View style={styles.previous}>
-                <Text>{props.previousResult}</Text>
+                <TouchableOpacity onPress={getPrevious} style={{backgroundColor:'lightgray', paddingHorizontal:30, paddingVertical:5}}>
+                    <Text>{props.previousResult}</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.current}>
                 <Text style={{fontSize: 30}}>{props.calculation}</Text>

@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Basic from "./screens/Basic";
 import Statistics from "./screens/Statistics";
+import StatsOptions from './screens/StatsOptions';
 
 
 const Stack = createStackNavigator();
@@ -41,6 +42,14 @@ export default function App(){
         }}  />
         <Stack.Screen name="Statistics" component={Statistics} 
         options={{ title: 'statistics calculator',
+        headerStyle: {
+          backgroundColor: 'lightgray',
+        },
+        headerTintColor: 'black',
+        headerTitleAlign: 'center'
+        }} />
+        <Stack.Screen name="options" component={StatsOptions} 
+        options={{ title: 'options',
         headerStyle: {
           backgroundColor: 'lightgray',
         },

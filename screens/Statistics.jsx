@@ -5,18 +5,32 @@ import StatsKeyboard from "../components/StatsKeyboard";
 import StatsView from "../components/StatsView";
 
 export default function Statistics({navigation}){
+    const del = "<=";
     const [numbers, setNumbers] = useState([]);
+    const [number, setNumber] = useState("");
+    const addToSet = () =>{
+        if (number !== ""){
+            setNumbers([...numbers, number]);
+            setNumber("");
+        }
+    }
     return(
         <View>
             <View style={styles.container}>
-                <StatsView numbers={numbers} setNumbers = {setNumbers} />
+                <StatsView numbers={numbers} setNumbers = {setNumbers} number={number} setNumber={setNumber} />
+                <TouchableOpacity onPress={()=> navigation.navigate('options')} style={styles.next}>
+                    <Text style={{fontSize:20}}>next</Text>
+                </TouchableOpacity> 
+                <TouchableOpacity style={styles.del} onPress={() => setNumber(number.slice(0,-1))}>
+                    <Text style={{fontSize:25}}>{del}</Text>
+                </TouchableOpacity> 
             </View>
             <View style={{width: windowWidth, flex:1, borderTopWidth: 1}}>
-                <TouchableOpacity onPress={()=> navigation.navigate('options')} style={styles.moveOn}>
-                    <Text>submit</Text>
+                <TouchableOpacity onPress={() => addToSet()} style={styles.add}>
+                    <Text>add</Text>
                 </TouchableOpacity> 
                 <View style={styles.keyboardContainer}>
-                    <StatsKeyboard numbers={numbers} setNumbers = {setNumbers} />
+                    <StatsKeyboard numbers={numbers} setNumbers = {setNumbers} number={number} setNumber={setNumber} />
                 </View>
             </View>
         </View>
@@ -28,7 +42,7 @@ const styles = StyleSheet.create({
         height: windowHeight*0.4,
         width: windowWidth,
     },
-    moveOn:{
+    add:{
         marginTop: windowHeight*0.045,
         position: 'absolute',
         width: windowWidth*0.15,
@@ -44,5 +58,17 @@ const styles = StyleSheet.create({
         width: windowWidth*0.65,
         height: windowHeight*0.4,
         marginTop: windowHeight*0.05,
+    },
+    del: {
+        position: 'absolute',
+        right: 40,
+        bottom: 15,
+        backgroundColor: 'lightgray',
+        padding: 10,
+        borderRadius: 100
+    },
+    next: {
+        bottom: 10,
+        left: 10
     }
 })

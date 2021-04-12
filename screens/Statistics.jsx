@@ -18,7 +18,9 @@ export default function Statistics({navigation}){
         <View>
             <View style={styles.container}>
                 <StatsView numbers={numbers} setNumbers = {setNumbers} number={number} setNumber={setNumber} />
-                <TouchableOpacity onPress={()=> navigation.navigate('options')} style={styles.next}>
+                <TouchableOpacity onPress={()=> navigation.navigate('options', {
+            numbers: numbers,
+          })} style={styles.next}>
                     <Text style={{fontSize:20}}>next</Text>
                 </TouchableOpacity> 
                 <TouchableOpacity style={styles.del} onPress={() => setNumber(number.slice(0,-1))}>

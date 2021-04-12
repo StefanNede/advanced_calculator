@@ -18,7 +18,7 @@ export default function StatsView({numbers, setNumbers, number, setNumber}){
 function CurrentSet({numbers}){
     return (
         <View style={styles.currentSet}>
-            <Text style={{fontSize:30}}>{numbers.join(" ")}</Text>
+            <Text style={{fontSize:30}}>{numbers.join(",")}</Text>
         </View>
     )
 }

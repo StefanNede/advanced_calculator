@@ -25,8 +25,8 @@ export default function Keyboard({ keys, setCalculation, calculation, previousRe
         else {
             for (let i=0;i<parts.length;i++){
                 if (parts[i]=== "+" || parts[i]=== "-" || parts[i]=== "x" || parts[i]=== "÷"){
-                    argument1 = parseInt(parts.slice(0, i).join(""));
-                    argument2 = parseInt(parts.slice(i+1).join(""));
+                    argument1 = parseFloat(parts.slice(0, i).join(""));
+                    argument2 = parseFloat(parts.slice(i+1).join(""));
                     switch (parts[i]){
                         case "+":
                             result = argument1 + argument2;

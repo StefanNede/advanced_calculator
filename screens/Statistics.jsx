@@ -27,12 +27,12 @@ export default function Statistics({navigation}){
                     <Text style={{fontSize:25}}>{del}</Text>
                 </TouchableOpacity> 
             </View>
-            <View style={{width: windowWidth, flex:1, borderTopWidth: 1}}>
+            <View style={{width: windowWidth, borderTopWidth: 1}}>
                 <TouchableOpacity onPress={() => addToSet()} style={styles.add}>
                     <Text>add</Text>
                 </TouchableOpacity> 
                 <View style={styles.keyboardContainer}>
-                    <StatsKeyboard numbers={numbers} setNumbers = {setNumbers} number={number} setNumber={setNumber} />
+                    <StatsKeyboard number={number} setNumber={setNumber} />
                 </View>
             </View>
         </View>
